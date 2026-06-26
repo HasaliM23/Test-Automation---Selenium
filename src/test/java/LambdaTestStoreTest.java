@@ -5,6 +5,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -41,8 +43,31 @@ public class LambdaTestStoreTest {
     org.openqa.selenium.JavascriptExecutor js = (org.openqa.selenium.JavascriptExecutor) driver;
     js.executeScript("arguments[0].click();", cart);
 
+    //WebElement successMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            //By.xpath("//div[contains(@class, 'alert-success')]")));
+
+    //String messageText = successMessage.getText();
+    //System.out.println("Notification Text: " + messageText);
+    //Assert.assertTrue(messageText.contains("Success"), "BUG: Success message is not displayed!");
+
+    WebElement cartBadge = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//span[contains(@class, 'cart-item-total')])[1]")));
+
+    wait.until(ExpectedConditions.textToBePresentInElement(cartBadge, "1"));
+
+    Assert.assertEquals(cartBadge.getText().trim(), "1", "BUG: Cart badge count is incorrect!");
+
+
+
+
 
 
 }
+
+    @AfterMethod
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
 
 }
