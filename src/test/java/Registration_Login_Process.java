@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -37,7 +38,7 @@ public class Registration_Login_Process {
         lname.sendKeys("Starc");
 
         WebElement email = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='input-email']")));
-        email.sendKeys("michis@gmail.com");
+        email.sendKeys("michs@gmail.com");
 
         WebElement telephone = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='input-telephone']")));
         telephone.sendKeys("0712345678");
@@ -74,10 +75,40 @@ public class Registration_Login_Process {
        // WebElement continous = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='submit']")));
        // continous.click();
 
+        WebElement successHeading = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(),'Created!')]")));
+
+        String expectedMessage = "Your Account Has Been Created!";
+        Assert.assertEquals(successHeading.getText().trim(), expectedMessage, "BUG: Registration failed!");
+    }
+
+
+    @Test
+    public void login_Process() {
+
+
+        driver.get("https://ecommerce-playground.lambdatest.io/index.php?route=account/login");
+
+
+        WebElement email = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='input-email']")));
+        email.sendKeys("michs@gmail.com");
+
+        WebElement psw = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='input-password']")));
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);",psw);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click();",psw );
+        psw.sendKeys("12345");
+
+        WebElement login = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='submit']")));
+        login.click();
 
 
 
 
     }
 
-}
+
+
+
+
+    }
+
+
