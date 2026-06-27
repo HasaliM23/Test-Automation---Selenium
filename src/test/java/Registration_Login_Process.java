@@ -1,0 +1,83 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import java.time.Duration;
+
+public class Registration_Login_Process {
+
+    WebDriver driver;
+    WebDriverWait wait;
+
+    @BeforeMethod
+    public void setup() {
+
+        driver = new ChromeDriver();
+
+        driver.manage().window().maximize();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+
+    }
+
+    @Test
+    public void registration_Process() {
+
+        driver.get("https://ecommerce-playground.lambdatest.io/index.php?route=account/register");
+        WebElement fname = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='input-firstname']")));
+        fname.sendKeys("Michel");
+
+        WebElement lname = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='input-lastname']")));
+        lname.sendKeys("Starc");
+
+        WebElement email = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='input-email']")));
+        email.sendKeys("michis@gmail.com");
+
+        WebElement telephone = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='input-telephone']")));
+        telephone.sendKeys("0712345678");
+
+       // WebElement psw = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("///input[@id='input-password']")));
+
+        //psw.sendKeys("12345");
+
+        WebElement psw = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='input-password']")));
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);",psw);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click();",psw );
+        psw.sendKeys("12345");
+
+        WebElement cpsw = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='input-confirm']")));
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);",cpsw);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click();",cpsw );
+        cpsw.sendKeys("12345");
+
+       // WebElement cpsw = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='input-confirm']")));
+
+       // cpsw.sendKeys("12345");
+
+        WebElement agree = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[@for='input-agree']")));
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);",agree);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click();",agree);
+
+        //WebElement agree = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label[@for='input-agree']")));
+        //agree.click();
+
+        WebElement continous = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='submit']")));
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);",continous);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click();",continous);
+
+       // WebElement continous = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='submit']")));
+       // continous.click();
+
+
+
+
+
+    }
+
+}
