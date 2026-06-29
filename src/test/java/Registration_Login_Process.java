@@ -120,7 +120,7 @@ public class Registration_Login_Process {
 
     }
 
-   /* @Test
+    @Test
     public void email_invalid() {
 
         driver.get("https://ecommerce-playground.lambdatest.io/index.php?route=account/register");
@@ -176,7 +176,7 @@ public class Registration_Login_Process {
 
     }
 
-*/
+
 
 
 
