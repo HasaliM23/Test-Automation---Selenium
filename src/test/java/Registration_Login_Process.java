@@ -176,6 +176,64 @@ public class Registration_Login_Process {
 
     }
 
+    @Test
+    public void password_Miss_match() {
+
+        driver.get("https://ecommerce-playground.lambdatest.io/index.php?route=account/register");
+        WebElement fname = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='input-firstname']")));
+        fname.sendKeys("Michel");
+
+        WebElement lname = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='input-lastname']")));
+        lname.sendKeys("Starc");
+
+        WebElement email = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='input-email']")));
+        email.sendKeys("michs@gmail.com");
+
+        WebElement telephone = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='input-telephone']")));
+        telephone.sendKeys("0712345678");
+
+        // WebElement psw = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("///input[@id='input-password']")));
+
+        //psw.sendKeys("12345");
+
+        WebElement psw = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='input-password']")));
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);",psw);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click();",psw );
+        psw.sendKeys("12345");
+
+        WebElement cpsw = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='input-confirm']")));
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);",cpsw);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click();",cpsw );
+        cpsw.sendKeys("1234");
+
+        // WebElement cpsw = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='input-confirm']")));
+
+        // cpsw.sendKeys("12345");
+
+        WebElement agree = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[@for='input-agree']")));
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);",agree);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click();",agree);
+
+        //WebElement agree = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label[@for='input-agree']")));
+        //agree.click();
+
+        WebElement continous = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='submit']")));
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);",continous);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click();",continous);
+
+
+        WebElement errorWarning = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[.='Password confirmation does not match password!']")));
+
+        String expectedErrorMessage = "Password confirmation does not match password!";
+        Assert.assertEquals(errorWarning.getText().trim(), expectedErrorMessage, "BUG: Validation error message is wrong!");
+
+
+    }
+
+
+
+
+
 
 
 
