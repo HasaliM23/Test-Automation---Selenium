@@ -101,9 +101,85 @@ public class Registration_Login_Process {
         login.click();
 
 
+    }
+
+    @Test
+    public void emaptyfieldTest() {
+
+        driver.get("https://ecommerce-playground.lambdatest.io/index.php?route=account/register");
+
+
+        WebElement continous = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='submit']")));
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);",continous);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click();",continous);
+
+        WebElement message = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[.='First Name must be between 1 and 32 characters!']")));
+
+        String expectedMessage = "First Name must be between 1 and 32 characters!";
+        Assert.assertEquals(message.getText().trim(), expectedMessage, "BUG: Registration failed!");
+
+    }
+
+   /* @Test
+    public void email_invalid() {
+
+        driver.get("https://ecommerce-playground.lambdatest.io/index.php?route=account/register");
+        WebElement fname = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='input-firstname']")));
+        fname.sendKeys("Michel");
+
+        WebElement lname = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='input-lastname']")));
+        lname.sendKeys("Starc");
+
+        WebElement email = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='input-email']")));
+        email.sendKeys("michsgmail.com");
+
+        WebElement telephone = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='input-telephone']")));
+        telephone.sendKeys("0712345678");
+
+        // WebElement psw = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("///input[@id='input-password']")));
+
+        //psw.sendKeys("12345");
+
+        WebElement psw = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='input-password']")));
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);",psw);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click();",psw );
+        psw.sendKeys("12345");
+
+        WebElement cpsw = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='input-confirm']")));
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);",cpsw);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click();",cpsw );
+        cpsw.sendKeys("12345");
+
+        // WebElement cpsw = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='input-confirm']")));
+
+        // cpsw.sendKeys("12345");
+
+        WebElement agree = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[@for='input-agree']")));
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);",agree);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click();",agree);
+
+        //WebElement agree = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label[@for='input-agree']")));
+        //agree.click();
+
+        WebElement continous = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='submit']")));
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);",continous);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click();",continous);
+
+        // WebElement continous = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='submit']")));
+        // continous.click();
+
+       // WebElement errorWarning = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class,'alert-danger')]")));
+
+        //String expectedErrorMessage = "E-Mail Address does not appear to be valid!";
+        //Assert.assertEquals(errorWarning.getText().trim(), expectedErrorMessage, "BUG: Validation error message is wrong!");
 
 
     }
+
+*/
+
+
+
 
 
 
