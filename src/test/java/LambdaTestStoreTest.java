@@ -158,6 +158,15 @@ public class LambdaTestStoreTest {
         org.openqa.selenium.JavascriptExecutor js = (org.openqa.selenium.JavascriptExecutor) driver;
         js.executeScript("arguments[0].click();", compare);
 
+        WebElement navCompareBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='entry_217822']//a[@aria-label='Compare']")));
+        navCompareBtn.click();
+
+        WebElement comparedProduct = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[contains(@class,'table')]//a[contains(text(),'Apple')]")));
+
+        Assert.assertTrue(comparedProduct.isDisplayed(), "BUG: Product was not found on the comparison page!");
+        System.out.println("Success: Navigated via header compare button and verified!");
+
+
     }
 }
 
