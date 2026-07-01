@@ -143,5 +143,21 @@ public class LambdaTestStoreTest {
         js.executeScript("arguments[0].click();", finalCheckout);
 
     }
+
+    @Test
+    public void addCompareProcess() {
+
+        WebElement searchInput = wait.until(ExpectedConditions.elementToBeClickable(By.name("search")));
+        searchInput.sendKeys("Apple");
+
+        WebElement search = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Search']")));
+        search.click();
+
+        WebElement compare = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//button[@title='Compare this Product'])[1]")));
+
+        org.openqa.selenium.JavascriptExecutor js = (org.openqa.selenium.JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", compare);
+
+    }
 }
 
